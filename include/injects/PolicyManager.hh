@@ -38,7 +38,10 @@ public:
         } else if (attrs & Attribute::SINGLETON)
         {
             static SP<T> s_instance;
-            s_instance = callable.call();
+            if (nullptr == s_instance)
+            {
+                s_instance = callable.call();
+            }
             return s_instance;
         } else
         {
